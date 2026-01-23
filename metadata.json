@@ -1,0 +1,8 @@
+{
+  "name": "LiveVision AI",
+  "description": "Real-time video and audio interaction with Gemini. Show the AI your world and ask questions naturally.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
