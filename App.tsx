@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
         
-      <header className="w-full max-w-6xl flex items-center justify-between mb-6">
+      <header className="w-full max-w-7xl flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/30">
              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,8 @@ const App: React.FC = () => {
         </a>
       </header>
 
-      <main className="w-full max-w-6xl aspect-[4/3] sm:aspect-[16/9] lg:aspect-[16/9] flex-1 min-h-[500px] shadow-2xl shadow-black/50 rounded-2xl overflow-hidden ring-1 ring-white/10">
+      {/* Main Container - Adjusted aspect ratio logic for responsive layout */}
+      <main className="w-full max-w-7xl flex-1 min-h-[600px] h-[80vh] shadow-2xl shadow-black/50 rounded-2xl overflow-hidden ring-1 ring-white/10">
         <LiveSession apiKey={apiKey} />
       </main>
 

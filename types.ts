@@ -15,3 +15,11 @@ export interface LiveSessionConfig {
   model: string;
   systemInstruction?: string;
 }
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'model';
+  text: string;
+  timestamp: Date;
+  isPartial?: boolean;
+}
