@@ -3,10 +3,10 @@ import { AudioVisualizerProps } from '../types';
 
 const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ stream, isActive, color = '#3b82f6' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
-  const analyserRef = useRef<AnalyserNode>();
-  const audioContextRef = useRef<AudioContext>();
-  const sourceRef = useRef<MediaStreamAudioSourceNode>();
+  const animationRef = useRef<number | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
 
   useEffect(() => {
     if (!stream || !isActive || !canvasRef.current) return;
@@ -17,6 +17,8 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ stream, isActive, col
     }
     
     const ctx = audioContextRef.current;
+    if (!ctx) return;
+
     const analyser = ctx.createAnalyser();
     analyser.fftSize = 64; // Low resolution for bars
     analyserRef.current = analyser;
@@ -62,7 +64,11 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ stream, isActive, col
         const y = (canvas.height - barHeight) / 2;
         
         canvasCtx.beginPath();
-        canvasCtx.roundRect(x, y, barWidth - 2, barHeight, 4);
+        if (canvasCtx.roundRect) {
+            canvasCtx.roundRect(x, y, barWidth - 2, barHeight, 4);
+        } else {
+            canvasCtx.rect(x, y, barWidth - 2, barHeight);
+        }
         canvasCtx.fill();
 
         x += barWidth + 1;
